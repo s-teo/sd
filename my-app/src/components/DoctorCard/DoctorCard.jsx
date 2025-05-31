@@ -1,5 +1,6 @@
 import React from 'react';
 import './DoctorCard.css';
+import StarRating from '../StarRating';
 import { useNavigate } from 'react-router-dom';
 
 const DoctorCard = ({ doctor, isSelected, onClick }) => {
@@ -18,7 +19,14 @@ const DoctorCard = ({ doctor, isSelected, onClick }) => {
       <img src={doctor.doctor_image} alt={doctor.full_name} />
       <h3>{doctor.full_name}</h3>
       <p>{doctor.specialty}</p>
-      <p>Рейтинг: {doctor.average_rating ?? 'нет данных'}</p>
+      <div style={{ marginTop: 8 }}>
+        {doctor.average_rating ? (
+          <StarRating rating={Math.round(doctor.average_rating)} />
+        ) : (
+          <span style={{ color: '#aaa' }}>нет данных</span>
+        )}
+      </div>
+
       <button onClick={handleBooking}>Записаться</button>
     </div>
   );

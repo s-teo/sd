@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getDoctors, getDoctorReviews, createOrUpdateReview } from '../../api/doctors';
 import DoctorCard from '../../components/DoctorCard/DoctorCard';
+import StarRating from '../../components/StarRating'; // путь поправь под себя
+
 import './DoctorsPage.css';
 
 const DoctorsPage = () => {
@@ -12,15 +14,18 @@ const DoctorsPage = () => {
   const [reviewRating, setReviewRating] = useState(5);
   const [reviewComment, setReviewComment] = useState('');
   const [submittingReview, setSubmittingReview] = useState(false);
+  
+  // Новое состояние для показа/скрытия формы
+  const [showReviewForm, setShowReviewForm] = useState(false);
 
   useEffect(() => {
     const loadDoctors = async () => {
       try {
         const data = await getDoctors();
         setDoctors(data);
-        if (data.length > 0) {
-          setSelectedDoctor(data[0]);
-        }
+        // if (data.length > 0) {
+        //   setSelectedDoctor(data[0]);
+        // }
       } catch (error) {
         console.error('Ошибка при загрузке докторов:', error);
       } finally {
@@ -46,12 +51,15 @@ const DoctorsPage = () => {
     };
 
     loadReviews();
+
+    // При смене доктора скрываем форму и сбрасываем поля
+    setShowReviewForm(false);
+    setReviewRating(5);
+    setReviewComment('');
   }, [selectedDoctor]);
 
   const handleDoctorClick = (doctor) => {
     setSelectedDoctor(doctor);
-    setReviewRating(5);
-    setReviewComment('');
   };
 
   const handleReviewSubmit = async (e) => {
@@ -69,6 +77,7 @@ const DoctorsPage = () => {
       setReviews(updatedReviews);
       setReviewComment('');
       setReviewRating(5);
+      setShowReviewForm(false); // скрываем форму после успешной отправки
     } catch (error) {
       console.error('Ошибка при отправке отзыва:', error);
       alert('Ошибка при отправке отзыва');
@@ -90,6 +99,7 @@ const DoctorsPage = () => {
             doctor={doctor}
             isSelected={selectedDoctor?.id === doctor.id}
             onClick={handleDoctorClick}
+            className={selectedDoctor?.id === doctor.id ? 'doctor-card selected' : 'doctor-card'}
           />
         ))}
       </div>
@@ -108,40 +118,57 @@ const DoctorsPage = () => {
                 <li key={review.id} className="review-item">
                   <strong>{review.patient_name}</strong> —{' '}
                   <small>{new Date(review.created_at).toLocaleDateString()}</small>
-                  <p>Рейтинг: {review.rating} / 5</p>
+                  <StarRating rating={review.rating} />
+
                   <p>{review.comment}</p>
                 </li>
               ))}
             </ul>
           )}
 
-          <form className="review-form" onSubmit={handleReviewSubmit}>
-            <label htmlFor="rating">Оценка (1–5):</label>
-            <select
-              id="rating"
-              value={reviewRating}
-              onChange={(e) => setReviewRating(Number(e.target.value))}
-              required
+          {/* Кнопка для показа формы */}
+          {!showReviewForm && (
+            <button
+              className="show-review-form-btn"
+              onClick={() => setShowReviewForm(true)}
             >
-              {[5, 4, 3, 2, 1].map((val) => (
-                <option key={val} value={val}>
-                  {val}
-                </option>
-              ))}
-            </select>
-
-            <label htmlFor="comment">Комментарий:</label>
-            <textarea
-              id="comment"
-              value={reviewComment}
-              onChange={(e) => setReviewComment(e.target.value)}
-              placeholder="Напишите отзыв (необязательно)"
-            />
-
-            <button type="submit" disabled={submittingReview}>
-              {submittingReview ? 'Отправка...' : 'Отправить отзыв'}
+              Оставить отзыв
             </button>
-          </form>
+          )}
+
+          {/* Форма отзыва — показываем, если showReviewForm === true */}
+          {showReviewForm && (
+            <form className="review-form" onSubmit={handleReviewSubmit}>
+              <label>Оценка (1–5):</label>
+              <StarRating
+                rating={reviewRating}
+                interactive={true}
+                onChange={(val) => setReviewRating(val)}
+              />
+
+
+              <label htmlFor="comment">Комментарий:</label>
+              <textarea
+                id="comment"
+                value={reviewComment}
+                onChange={(e) => setReviewComment(e.target.value)}
+                placeholder="Напишите отзыв (необязательно)"
+              />
+
+              <button type="submit" disabled={submittingReview}>
+                {submittingReview ? 'Отправка...' : 'Отправить отзыв'}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setShowReviewForm(false)}
+                disabled={submittingReview}
+                className="cancel-review-btn"
+              >
+                Отмена
+              </button>
+            </form>
+          )}
         </section>
       )}
     </div>

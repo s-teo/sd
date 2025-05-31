@@ -48,7 +48,7 @@ const Profile = () => {
         <input name="last_name" value={formData.last_name} onChange={handleChange} placeholder="Фамилия" />
         <input name="email" value={formData.email} onChange={handleChange} placeholder="Email" />
         <input name="phone" value={formData.phone || ""} onChange={handleChange} placeholder="Телефон" />
-        <button type="submit">Сохранить</button>
+        <button >Сохранить</button>
         {success && <div className="success-msg">Профиль обновлён!</div>}
       </form>
     </div>

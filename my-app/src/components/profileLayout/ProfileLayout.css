@@ -1,0 +1,29 @@
+.profile-layout {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  flex-wrap: wrap;
+  align-items: start;
+}
+
+.profile-left {
+  flex: 1;
+  position: sticky;
+  top: 20px;
+  min-width: 300px;
+}
+
+.profile-right {
+  flex: 1;
+  min-width: 250px;
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+@media (max-width: 708px) {
+  .profile-left {
+  position: relative  ;
+}
+}
+

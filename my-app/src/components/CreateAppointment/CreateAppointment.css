@@ -1,0 +1,106 @@
+.appointment-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background: #fefefe;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #333;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 4px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+input[readonly] {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+}
+
+button[type="submit"] {
+  margin-top: 15px;
+  padding: 10px 16px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button[type="submit"]:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #842029;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  border: 1px solid #f5c2c7;
+}
+
+.alert-success {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  border: 1px solid #badbcc;
+}
+
+.slots-day-group {
+  margin-bottom: 20px;
+}
+
+.slots-day-group h4 {
+  margin-bottom: 8px;
+  color: #007bff;
+  font-weight: 700;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+
+.slots-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.slot-btn {
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f8f9fa;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+  font-size: 14px;
+}
+
+.slot-btn:hover {
+  background-color: #e2e6ea;
+}
+
+.slot-btn.selected {
+  background-color: #007bff;
+  color: white;
+  border-color: #0056b3;
+}

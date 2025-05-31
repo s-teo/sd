@@ -1,0 +1,48 @@
+.profile-container {
+  max-width: 100%;
+  background-color: #f6f9fc;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.profile-container h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #2c3e50;
+}
+
+.profile-container form input {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 12px;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.profile-container form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #2ecc71;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.profile-container form button:hover {
+  background-color: #27ae60;
+}
+
+.success-msg {
+  margin-top: 10px;
+  color: #27ae60;
+  text-align: center;
+  font-weight: bold;
+}

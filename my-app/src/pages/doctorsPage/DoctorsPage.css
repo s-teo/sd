@@ -1,0 +1,23 @@
+.doctors-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.doctor-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.reviews-section {
+  margin-top: 40px;
+  padding: 20px;
+  max-width: 600px;
+  background-color: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin-left: auto;
+  margin-right: auto;
+}

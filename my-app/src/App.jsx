@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
-import Layout from "./components/Layout";
+import Layout from "./layouts/Layout";
 import HomePage from "./pages/HomePage/HomePage";
 import Login from "./pages/loginPage/LoginPage"
 import Register from "./pages/registerPage/RegisterPage";
-import PrivateRoute from "./components/PrivateRoute";
+import PrivateRoute from "./routes/PrivateRoute";
 import Profile from "./pages/profilePage/ProfilePage";
 import CreateAppointment from "./components/CreateAppointment/CreateAppointment";
 import Doctors from "./pages/DoctorsPage/DoctorsPage";
@@ -20,6 +20,7 @@ function App() {
             {/* <Route path="/" element={<HomePage />} /> */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/" element={<HomePage />} />
 
             {/* Защищенные маршруты */}
             <Route

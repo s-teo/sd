@@ -1,7 +1,7 @@
 import React from 'react';
 import ProfileForm from '../../components/profile/Profile';
 import MyAppointments from '../../components/myAppointments/MyAppointments';
-import ProfileLayout from '../../components/profileLayout/ProfileLayout';
+import ProfileLayout from '../../layouts/profileLayout/ProfileLayout';
 
 const ProfilePage = () => {
   return (

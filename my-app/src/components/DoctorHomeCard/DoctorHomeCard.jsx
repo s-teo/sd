@@ -1,16 +1,9 @@
 import React from 'react';
-import './DoctorCard.css';
+import './DoctorHomeCard.css';
 import StarRating from '../ui/StarRating';
 import { useNavigate } from 'react-router-dom';
 
 const DoctorCard = ({ doctor, isSelected, onClick }) => {
-  const navigate = useNavigate();
-
-  const handleBooking = (e) => {
-    e.stopPropagation(); // не активирует onClick карточки
-    navigate(`/appointments/create?doctor=${doctor.id}`);
-  };
-
   return (
     <div
       className={`doctor-card ${isSelected ? 'selected' : ''}`}
@@ -26,8 +19,6 @@ const DoctorCard = ({ doctor, isSelected, onClick }) => {
           <span style={{ color: '#aaa' }}>нет данных</span>
         )}
       </div>
-
-      <button onClick={handleBooking}>Записаться</button>
     </div>
   );
 };

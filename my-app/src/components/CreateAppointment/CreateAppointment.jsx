@@ -123,10 +123,6 @@ const CreateAppointment = () => {
                       [],
                       { hour: "2-digit", minute: "2-digit" }
                     );
-                    const end = new Date(slot.end_time).toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    });
                     return (
                       <button
                         type="button"
@@ -136,7 +132,7 @@ const CreateAppointment = () => {
                         }`}
                         onClick={() => setSelectedSlot(slot.id)}
                       >
-                        {start} - {end}
+                        {start}
                       </button>
                     );
                   })}

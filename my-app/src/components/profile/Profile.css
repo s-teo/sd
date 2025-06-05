@@ -46,3 +46,12 @@
   text-align: center;
   font-weight: bold;
 }
+
+.email-warning {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}

@@ -1,0 +1,14 @@
+/* Layout.css */
+
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* занимает всю высоту окна */
+}
+
+.layout-main {
+  flex: 1; /* растягивается и занимает всё свободное пространство */
+  padding: 20px;
+  background-color: #fff; /* по желанию, чтобы отделить контент */
+  box-sizing: border-box;
+}

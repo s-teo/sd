@@ -87,3 +87,13 @@
 .my-appointments-button button:hover:not(:disabled) {
   background-color: #c0392b;
 }
+
+.my-appointments-history {
+  margin-top: 2rem;
+  border-top: 1px solid #ccc;
+  padding-top: 1rem;
+}
+.my-appointments-status.completed {
+  color: gray;
+  font-style: italic;
+}

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { getAppointments, cancelAppointment } from '../../api/appointments';
-import { getDoctors } from '../../api/doctors';
-import './MyAppointments.css';
+import React, { useEffect, useState } from "react";
+import { getAppointments, cancelAppointment } from "../../api/appointments";
+import { getDoctors } from "../../api/doctors";
+import AppointmentHistory from "./AppointmentHistory";
+import "./MyAppointments.css";
 
 const MyAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -16,18 +17,18 @@ const MyAppointments = () => {
         setLoading(true);
         const [appsData, doctorsData] = await Promise.all([
           getAppointments(),
-          getDoctors()
+          getDoctors(),
         ]);
         setAppointments(appsData);
 
         const doctorsMap = {};
-        doctorsData.forEach(doc => {
+        doctorsData.forEach((doc) => {
           doctorsMap[doc.id] = doc;
         });
         setDoctors(doctorsMap);
         setLoading(false);
       } catch (err) {
-        setError('Ошибка загрузки данных');
+        setError("Ошибка загрузки данных");
         setLoading(false);
       }
     };
@@ -38,9 +39,9 @@ const MyAppointments = () => {
     try {
       setCancellingId(appointmentId);
       await cancelAppointment(appointmentId);
-      setAppointments((prev) => prev.filter(app => app.id !== appointmentId));
+      setAppointments((prev) => prev.filter((app) => app.id !== appointmentId));
     } catch (err) {
-      alert('Ошибка отмены записи');
+      alert("Ошибка отмены записи");
     } finally {
       setCancellingId(null);
     }
@@ -49,45 +50,78 @@ const MyAppointments = () => {
   if (loading) return <p className="my-appointments-loading">Загрузка...</p>;
   if (error) return <p className="my-appointments-error">{error}</p>;
 
+  // Разделяем по статусу и сортируем по времени (start_time)
+  const activeAppointments = appointments
+    .filter((app) => app.status !== "completed")
+    .sort((a, b) =>
+      new Date(a.time_slot_data?.start_time) - new Date(b.time_slot_data?.start_time)
+    );
+
+  const completedAppointments = appointments
+    .filter((app) => app.status === "completed")
+    .sort((a, b) =>
+      new Date(a.time_slot_data?.start_time) - new Date(b.time_slot_data?.start_time)
+    );
+
+  const statusTranslations = {
+    scheduled: "Запланировано",
+    cancelled: "Отменено",
+    completed: "Завершено",
+  };
+
   return (
     <div className="my-appointments-container">
       <h2>Мои записи</h2>
-
-      {appointments.length === 0 ? (
+      {activeAppointments.length === 0 ? (
         <p className="my-appointments-empty">Записей нет</p>
       ) : (
         <ul className="my-appointments-list">
-          {appointments.map(app => {
+          {activeAppointments.map((app) => {
             const doctor = doctors[app.doctor];
-            let statusClass = 'other';
-            if (app.status === 'scheduled') statusClass = 'scheduled';
-            else if (app.status === 'cancelled') statusClass = 'cancelled';
+            let statusClass = "other";
+            if (app.status === "scheduled") statusClass = "scheduled";
+            else if (app.status === "cancelled") statusClass = "cancelled";
 
             return (
               <li key={app.id} className="my-appointments-item">
                 <div className="my-appointments-info">
-                  <p><strong>Врач:</strong> {doctor ? doctor.full_name : 'Загрузка...'}</p>
-                  <p><strong>Специальность:</strong> {doctor?.specialty || '-'}</p>
-                  <p><strong>Статус:</strong> <span className={`my-appointments-status ${statusClass}`}>{app.status}</span></p>
-                  <p><strong>Дата и время:</strong> {app.time_slot_data ? (
-                    <>
-                      {new Date(app.time_slot_data.start_time).toLocaleString('ru-RU', {
-                        day: 'numeric',
-                        month: 'long',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                      })}
-                    </>
-                  ) : 'Нет данных'}</p>
-
+                  <p>
+                    <strong>Врач:</strong>{" "}
+                    {doctor ? doctor.full_name : "Загрузка..."}
+                  </p>
+                  <p>
+                    <strong>Специальность:</strong> {doctor?.specialty || "-"}
+                  </p>
+                  <p>
+                    <strong>Статус:</strong>{" "}
+                    <span className={`my-appointments-status ${statusClass}`}>
+                      {statusTranslations[app.status] || app.status}
+                    </span>
+                  </p>
+                  <p>
+                    <strong>Дата и время:</strong>{" "}
+                    {app.time_slot_data ? (
+                      new Date(app.time_slot_data.start_time).toLocaleString(
+                        "ru-RU",
+                        {
+                          day: "numeric",
+                          month: "long",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        }
+                      )
+                    ) : (
+                      "Нет данных"
+                    )}
+                  </p>
                 </div>
                 <div className="my-appointments-button">
-                  {app.status === 'scheduled' && (
+                  {app.status === "scheduled" && (
                     <button
                       onClick={() => handleCancel(app.id)}
                       disabled={cancellingId === app.id}
                     >
-                      {cancellingId === app.id ? 'Отмена...' : 'Отменить'}
+                      {cancellingId === app.id ? "Отмена..." : "Отменить"}
                     </button>
                   )}
                 </div>
@@ -96,6 +130,9 @@ const MyAppointments = () => {
           })}
         </ul>
       )}
+
+      {/* Вывод истории завершённых записей */}
+      <AppointmentHistory appointments={completedAppointments} doctors={doctors} />
     </div>
   );
 };

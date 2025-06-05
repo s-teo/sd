@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getDoctors, getDoctorReviews, createOrUpdateReview } from '../../api/doctors';
 import DoctorCard from '../../components/DoctorCard/DoctorCard';
-import StarRating from '../../components/StarRating'; // путь поправь под себя
+import StarRating from '../../components/ui/StarRating'; // путь поправь под себя
 
 import './DoctorsPage.css';
 

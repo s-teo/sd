@@ -14,11 +14,14 @@ export const updateProfile = (data) => api.put("users/me/", data);
 export const activateUser = (token) => api.get(`users/activate/${token}/`);
 
 export function logout() {
-  // Удаляем токены из localStorage
   localStorage.removeItem("access");
   localStorage.removeItem("refresh");
-
-
-  // Перезагрузить страницу или сделать редирект на страницу логина
-//   window.location.href = "/login";
 }
+
+// 📱 Отправка SMS-кода
+export const sendVerificationCode = (phone) =>
+  api.post("users/send-code/", { phone });
+
+// ✅ Подтверждение SMS-кода
+export const verifyPhoneCode = (phone, code) =>
+  api.post("users/verify-code/", { phone, code });

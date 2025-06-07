@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-import { useAuth } from "../../context/AuthContext"; // путь подкорректируй
+import React, { useState, useEffect } from "react";
+import { useAuth } from "../../context/AuthContext"; // проверь, корректен ли путь
+import { useLocation } from "react-router-dom";
 import "./LoginPage.css";
 
 const Login = () => {
   const { login } = useAuth();
+  const location = useLocation();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -13,8 +15,19 @@ const Login = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // Flash сообщение
+  const [flashMessage, setFlashMessage] = useState(location.state?.flash || null);
+  const [showFlash, setShowFlash] = useState(!!location.state?.flash);
+
+  useEffect(() => {
+    if (flashMessage) {
+      const timer = setTimeout(() => setShowFlash(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [flashMessage]);
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
@@ -34,6 +47,13 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      {showFlash && (
+        <div className="flash-message">
+          {flashMessage}
+          <button className="close-btn" onClick={() => setShowFlash(false)}>×</button>
+        </div>
+      )}
+
       <h2>Вход</h2>
       <form onSubmit={handleSubmit} className="login-form" noValidate>
         <label htmlFor="username">

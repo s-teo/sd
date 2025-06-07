@@ -9,6 +9,8 @@ import PrivateRoute from "./routes/PrivateRoute";
 import Profile from "./pages/profilePage/ProfilePage";
 import CreateAppointment from "./components/CreateAppointment/CreateAppointment";
 import Doctors from "./pages/DoctorsPage/DoctorsPage";
+import PhoneVerification from "@pages/PhoneVerification/PhoneVerification";
+
 
 
 function App() {
@@ -21,6 +23,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/" element={<HomePage />} />
+            <Route path="/verify-phone" element={<PhoneVerification />} />
 
             {/* Защищенные маршруты */}
             <Route

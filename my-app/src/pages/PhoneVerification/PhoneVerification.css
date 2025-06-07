@@ -1,0 +1,84 @@
+.phone-verification-container {
+  max-width: 420px;
+  margin: 40px auto;
+  padding: 30px 35px;
+  background: #f5f7fa;
+  border-radius: 14px;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.12),
+    inset 0 0 12px #d0d7e3;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.phone-verification-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #4a6fa5;
+  text-shadow: 0 0 6px #a4b8d9aa;
+}
+
+.phone-verification-container input {
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1.8px solid #aac4f8;
+  background-color: #fff;
+  box-shadow: inset 0 2px 6px #d6dbf7;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.phone-verification-container input:focus {
+  border-color: #4a6fa5;
+  box-shadow: 0 0 12px #4a6fa5aa;
+  transform: scale(1.02);
+}
+
+.phone-verification-container button {
+  padding: 14px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  background: linear-gradient(135deg, #4a6fa5, #88a0ff);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 5px 18px #4a6fa5bb;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.phone-verification-container button:hover:enabled {
+  background: linear-gradient(135deg, #88a0ff, #4a6fa5);
+  transform: scale(1.03);
+}
+
+.phone-verification-container button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.phone-verification-container .message {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #555;
+  background: #eef3ff;
+  padding: 10px;
+  border-radius: 8px;
+}
+.success-flag {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  font-weight: 600;
+  display: inline-block;
+}

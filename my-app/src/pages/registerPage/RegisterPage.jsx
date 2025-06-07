@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../api/auth";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import "./RegisterPage.css";
 
 function Register() {
@@ -16,28 +18,31 @@ function Register() {
     passwordConfirm: "",
   });
 
-  // errors — объект вида { поле: [сообщения об ошибках] }
   const [errors, setErrors] = useState({});
 
   const usernameRegex = /^[\w.@+-]+$/;
 
   const handleChange = (e) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors({}); // очищаем ошибки перед отправкой
+    setErrors({});
 
-    // Локальная валидация
     let validationErrors = {};
 
     if (!usernameRegex.test(formData.username)) {
-      validationErrors.username = ["Имя пользователя содержит недопустимые символы."];
+      validationErrors.username = [
+        "Имя пользователя содержит недопустимые символы.",
+      ];
     }
 
     if (formData.username.length > 150) {
-      validationErrors.username = [...(validationErrors.username || []), "Имя пользователя должно быть не длиннее 150 символов."];
+      validationErrors.username = [
+        ...(validationErrors.username || []),
+        "Имя пользователя должно быть не длиннее 150 символов.",
+      ];
     }
 
     if (formData.password !== formData.passwordConfirm) {
@@ -54,17 +59,18 @@ function Register() {
         username: formData.username,
         first_name: formData.first_name,
         last_name: formData.last_name,
-        email: formData.email,
-        phone: formData.phone,
+        phone: "+" + formData.phone, // phone уже без "+", добавляем вручную
         password: formData.password,
       });
-      navigate("/login");
+
+      navigate("/login", { state: { flash: "Регистрация прошла успешно!" } });
     } catch (err) {
       if (err.response?.data) {
-        // err.response.data — объект с ошибками от сервера, например {username: [...], email: [...], non_field_errors: [...]}
         setErrors(err.response.data);
       } else {
-        setErrors({ non_field_errors: ["Ошибка при регистрации. Попробуйте позже."] });
+        setErrors({
+          non_field_errors: ["Ошибка при регистрации. Попробуйте позже."],
+        });
       }
     }
   };
@@ -81,9 +87,12 @@ function Register() {
           onChange={handleChange}
           required
         />
-        {errors.username && errors.username.map((msg, i) => (
-          <div className="error" key={i}>{msg}</div>
-        ))}
+        {errors.username &&
+          errors.username.map((msg, i) => (
+            <div className="error" key={i}>
+              {msg}
+            </div>
+          ))}
 
         <div className="form-row">
           <div className="form-group">
@@ -95,9 +104,12 @@ function Register() {
               onChange={handleChange}
               required
             />
-            {errors.first_name && errors.first_name.map((msg, i) => (
-              <div className="error" key={i}>{msg}</div>
-            ))}
+            {errors.first_name &&
+              errors.first_name.map((msg, i) => (
+                <div className="error" key={i}>
+                  {msg}
+                </div>
+              ))}
           </div>
           <div className="form-group">
             <input
@@ -108,24 +120,39 @@ function Register() {
               onChange={handleChange}
               required
             />
-            {errors.last_name && errors.last_name.map((msg, i) => (
-              <div className="error" key={i}>{msg}</div>
-            ))}
+            {errors.last_name &&
+              errors.last_name.map((msg, i) => (
+                <div className="error" key={i}>
+                  {msg}
+                </div>
+              ))}
           </div>
-        </div>  
+        </div>
 
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Телефон"
+        <PhoneInput
+          country={"kg"}
           value={formData.phone}
-          onChange={handleChange}
-          pattern="^\+?\d{10,15}$"
-          title="Введите корректный номер телефона"
+          onChange={(phone) => setFormData((prev) => ({ ...prev, phone }))}
+          inputProps={{
+            name: "phone",
+            required: true,
+          }}
+          inputStyle={{ width: "100%" }}
+          specialLabel={null}
         />
-        {errors.phone && errors.phone.map((msg, i) => (
-          <div className="error" key={i}>{msg}</div>
-        ))}
+        {errors.phone &&
+          errors.phone.map((msg, i) => (
+            <div className="error" key={i}>
+              {msg}
+            </div>
+          ))}
+
+        {errors.email &&
+          errors.email.map((msg, i) => (
+            <div className="error" key={i}>
+              {msg}
+            </div>
+          ))}
 
         <div className="form-row">
           <div className="form-group">
@@ -137,9 +164,12 @@ function Register() {
               onChange={handleChange}
               required
             />
-            {errors.password && errors.password.map((msg, i) => (
-              <div className="error" key={i}>{msg}</div>
-            ))}
+            {errors.password &&
+              errors.password.map((msg, i) => (
+                <div className="error" key={i}>
+                  {msg}
+                </div>
+              ))}
           </div>
           <div className="form-group">
             <input
@@ -151,15 +181,20 @@ function Register() {
               required
             />
           </div>
-          
         </div>
-        {errors.passwordConfirm && errors.passwordConfirm.map((msg, i) => (
-              <div className="error" key={i}>{msg}</div>
-            ))}
+        {errors.passwordConfirm &&
+          errors.passwordConfirm.map((msg, i) => (
+            <div className="error" key={i}>
+              {msg}
+            </div>
+          ))}
 
-        {errors.non_field_errors && errors.non_field_errors.map((msg, i) => (
-          <div className="error" key={i}>{msg}</div>
-        ))}
+        {errors.non_field_errors &&
+          errors.non_field_errors.map((msg, i) => (
+            <div className="error" key={i}>
+              {msg}
+            </div>
+          ))}
 
         <button type="submit">Зарегистрироваться</button>
       </form>

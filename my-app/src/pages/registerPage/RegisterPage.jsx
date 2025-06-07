@@ -112,19 +112,7 @@ function Register() {
               <div className="error" key={i}>{msg}</div>
             ))}
           </div>
-        </div>
-
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        {errors.email && errors.email.map((msg, i) => (
-          <div className="error" key={i}>{msg}</div>
-        ))}
+        </div>  
 
         <input
           type="tel"

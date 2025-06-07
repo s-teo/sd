@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getProfile, updateProfile } from "../../api/auth";
+import { getProfile, updateProfile } from "@api/auth";
 import "./Profile.css";
 
 const Profile = () => {
@@ -59,6 +59,7 @@ const Profile = () => {
         <input name="first_name" value={formData.first_name} onChange={handleChange} placeholder="Имя" />
         <input name="last_name" value={formData.last_name} onChange={handleChange} placeholder="Фамилия" />
         <input name="email" value={formData.email} onChange={handleChange} placeholder="Email" />
+        
         <input name="phone" value={formData.phone || ""} onChange={handleChange} placeholder="Телефон" />
         <button>Сохранить</button>
         {success && <div className="success-msg">Профиль обновлён!</div>}

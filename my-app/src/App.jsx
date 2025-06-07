@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import Layout from "./layouts/Layout";
-import HomePage from "./pages/HomePage/HomePage";
+import HomePage from "@pages/HomePage/HomePage";
 import Login from "./pages/loginPage/LoginPage"
 import Register from "./pages/registerPage/RegisterPage";
 import PrivateRoute from "./routes/PrivateRoute";

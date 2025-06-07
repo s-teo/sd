@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { getAppointments, cancelAppointment } from "../../api/appointments";
-import { getDoctors } from "../../api/doctors";
+import { getAppointments, cancelAppointment } from "@api/appointments";
+import { getDoctors } from "@api/doctors";
 import AppointmentHistory from "./AppointmentHistory";
 import "./MyAppointments.css";
 

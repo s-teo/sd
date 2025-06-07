@@ -4,6 +4,8 @@ import { sendVerificationCode, verifyPhoneCode } from "../../api/auth";
 import "./PhoneVerification.css";
 
 export default function PhoneVerification() {
+  const isMock = true; // ← переключатель режима
+
   const location = useLocation();
   const navigate = useNavigate();
   const phone = location.state?.phone || "";
@@ -14,7 +16,7 @@ export default function PhoneVerification() {
   const [hasSent, setHasSent] = useState(false);
   const [timer, setTimer] = useState(60);
 
-  const hasSentRef = useRef(false); // ⚠️ защита от двойного вызова
+  const hasSentRef = useRef(false); // защита от двойной отправки
 
   useEffect(() => {
     if (phone && !hasSentRef.current) {
@@ -35,10 +37,15 @@ export default function PhoneVerification() {
   }, [timer, hasSent]);
 
   const sendCode = async () => {
+    setLoading(true);
     try {
-      setLoading(true);
-      const res = await sendVerificationCode(phone);
-      setMessage(res.data.message || "Код отправлен на телефон");
+      if (isMock) {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        setMessage("Мок: код отправлен (используй 123456)");
+      } else {
+        const res = await sendVerificationCode(phone);
+        setMessage(res.data.message || "Код отправлен на телефон");
+      }
       setHasSent(true);
       setTimer(60);
     } catch {
@@ -53,14 +60,27 @@ export default function PhoneVerification() {
       setMessage("Введите код");
       return;
     }
+
+    setLoading(true);
     try {
-      setLoading(true);
-      const res = await verifyPhoneCode(phone, code);
-      setMessage(res.data.message || "Телефон подтверждён");
-      if (res.status === 200) {
-        navigate("/login", {
-          state: { flashMessage: "Телефон подтверждён успешно" },
-        });
+      if (isMock) {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        if (code === "1234") {
+          setMessage("Телефон подтверждён");
+          navigate("/login", {
+            state: { flashMessage: "Телефон подтверждён успешно" },
+          });
+        } else {
+          setMessage("Неверный код");
+        }
+      } else {
+        const res = await verifyPhoneCode(phone, code);
+        setMessage(res.data.message || "Телефон подтверждён");
+        if (res.status === 200) {
+          navigate("/login", {
+            state: { flashMessage: "Телефон подтверждён успешно" },
+          });
+        }
       }
     } catch {
       setMessage("Неверный код или ошибка");
@@ -81,7 +101,7 @@ export default function PhoneVerification() {
         placeholder="Введите код"
       />
 
-      <button onClick={verifyCode} disabled={loading || !code}>
+      <button onClick={verifyCode} type="sumbit" disabled={loading || !code}>
         Подтвердить
       </button>
 

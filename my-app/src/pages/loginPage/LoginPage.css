@@ -94,7 +94,7 @@
 button[type="submit"] {
   margin-top: 10px;
   padding: 14px 0;
-  background: linear-gradient(135deg, #4a6fa5, #88a0ff);
+  background: #88a0ff;
   border: none;
   border-radius: 12px;
   color: #fff;

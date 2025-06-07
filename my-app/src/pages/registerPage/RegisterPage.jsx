@@ -12,7 +12,6 @@ function Register() {
     username: "",
     first_name: "",
     last_name: "",
-    email: "",
     phone: "",
     password: "",
     passwordConfirm: "",
@@ -20,33 +19,96 @@ function Register() {
 
   const [errors, setErrors] = useState({});
 
-  const usernameRegex = /^[\w.@+-]+$/;
+  const usernameRegex = /^[a-zA-Z_@.+-][\w.@+-]*$/;
+  const nameRegex = /^[а-яА-ЯёЁa-zA-Z]+$/;
+
+  // Функция для валидации одного поля
+  const validateField = (name, value) => {
+    let errorMsgs = [];
+
+    if (name === "username") {
+      if (!usernameRegex.test(value)) {
+        errorMsgs.push(
+          "Имя пользователя должно начинаться с буквы или символа (_ @ . + -) и содержать только буквы, цифры и символы . _ @ + -"
+        );
+      }
+      if (value.length > 150) {
+        errorMsgs.push("Имя пользователя должно быть не длиннее 150 символов.");
+      }
+    }
+
+    if (name === "first_name") {
+      if (value && !nameRegex.test(value)) {
+        errorMsgs.push("Имя должно содержать только буквы без пробелов и символов.");
+      }
+    }
+
+    if (name === "last_name") {
+      if (value && !nameRegex.test(value)) {
+        errorMsgs.push("Фамилия должна содержать только буквы без пробелов и символов.");
+      }
+    }
+
+    if (name === "passwordConfirm") {
+      if (value !== formData.password) {
+        errorMsgs.push("Пароли не совпадают");
+      }
+    }
+
+    return errorMsgs;
+  };
 
   const handleChange = (e) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+
+    // Обновляем форму
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Валидация конкретного поля
+    const fieldErrors = validateField(name, value);
+
+    // Для пароля подтверждения ещё надо проверить текущий пароль
+    if (name === "password" && formData.passwordConfirm) {
+      const confirmErrors = validateField("passwordConfirm", formData.passwordConfirm);
+      setErrors((prev) => ({
+        ...prev,
+        password: fieldErrors,
+        passwordConfirm: confirmErrors,
+      }));
+      return;
+    }
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: fieldErrors.length > 0 ? fieldErrors : undefined,
+    }));
+  };
+
+  // Для PhoneInput валидацию вызываем отдельно (onChange даёт сразу номер)
+  const handlePhoneChange = (phone) => {
+    setFormData((prev) => ({ ...prev, phone }));
+
+    // Простая проверка на пустоту (или можно более сложную)
+    if (!phone || phone.length < 5) {
+      setErrors((prev) => ({
+        ...prev,
+        phone: ["Введите корректный номер телефона."],
+      }));
+    } else {
+      setErrors((prev) => ({ ...prev, phone: undefined }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors({});
 
+    // Вся валидация при отправке (на всякий случай)
     let validationErrors = {};
 
-    if (!usernameRegex.test(formData.username)) {
-      validationErrors.username = [
-        "Имя пользователя содержит недопустимые символы.",
-      ];
-    }
-
-    if (formData.username.length > 150) {
-      validationErrors.username = [
-        ...(validationErrors.username || []),
-        "Имя пользователя должно быть не длиннее 150 символов.",
-      ];
-    }
-
-    if (formData.password !== formData.passwordConfirm) {
-      validationErrors.passwordConfirm = ["Пароли не совпадают"];
+    // Проверяем все поля, вызывая validateField
+    for (const [key, value] of Object.entries(formData)) {
+      const errs = validateField(key, value);
+      if (errs.length > 0) validationErrors[key] = errs;
     }
 
     if (Object.keys(validationErrors).length > 0) {
@@ -59,11 +121,13 @@ function Register() {
         username: formData.username,
         first_name: formData.first_name,
         last_name: formData.last_name,
-        phone: "+" + formData.phone, // phone уже без "+", добавляем вручную
+        phone: "+" + formData.phone,
         password: formData.password,
       });
 
-      navigate("/login", { state: { flash: "Регистрация прошла успешно!" } });
+      navigate("/login", {
+        state: { flashMessage: "Регистрация прошла успешно!" },
+      });
     } catch (err) {
       if (err.response?.data) {
         setErrors(err.response.data);
@@ -132,7 +196,7 @@ function Register() {
         <PhoneInput
           country={"kg"}
           value={formData.phone}
-          onChange={(phone) => setFormData((prev) => ({ ...prev, phone }))}
+          onChange={handlePhoneChange}
           inputProps={{
             name: "phone",
             required: true,
@@ -180,14 +244,14 @@ function Register() {
               onChange={handleChange}
               required
             />
+            {errors.passwordConfirm &&
+              errors.passwordConfirm.map((msg, i) => (
+                <div className="error" key={i}>
+                  {msg}
+                </div>
+              ))}
           </div>
         </div>
-        {errors.passwordConfirm &&
-          errors.passwordConfirm.map((msg, i) => (
-            <div className="error" key={i}>
-              {msg}
-            </div>
-          ))}
 
         {errors.non_field_errors &&
           errors.non_field_errors.map((msg, i) => (
@@ -203,3 +267,5 @@ function Register() {
 }
 
 export default Register;
+
+// navigate("/verify-phone", { state: { flashMessage: "Регистрация прошла успешно!" } });

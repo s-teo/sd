@@ -16,8 +16,10 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   // Flash сообщение
-  const [flashMessage, setFlashMessage] = useState(location.state?.flash || null);
-  const [showFlash, setShowFlash] = useState(!!location.state?.flash);
+  const [flashMessage, setFlashMessage] = useState(
+    location.state?.flashMessage || null
+  );
+  const [showFlash, setShowFlash] = useState(!!location.state?.flashMessage);
 
   useEffect(() => {
     if (flashMessage) {
@@ -50,7 +52,9 @@ const Login = () => {
       {showFlash && (
         <div className="flash-message">
           {flashMessage}
-          <button className="close-btn" onClick={() => setShowFlash(false)}>×</button>
+          <button className="close-btn" onClick={() => setShowFlash(false)}>
+            ×
+          </button>
         </div>
       )}
 

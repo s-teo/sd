@@ -125,8 +125,8 @@ function Register() {
         password: formData.password,
       });
 
-      navigate("/login", {
-        state: { flashMessage: "Регистрация прошла успешно!" },
+      navigate("/verify-phone", {
+        state: { phone: "+" + formData.phone, flashMessage: "Подтвердите номер телефона, Пожалуйста!" },
       });
     } catch (err) {
       if (err.response?.data) {
@@ -203,6 +203,7 @@ function Register() {
           }}
           inputStyle={{ width: "100%" }}
           specialLabel={null}
+          required
         />
         {errors.phone &&
           errors.phone.map((msg, i) => (

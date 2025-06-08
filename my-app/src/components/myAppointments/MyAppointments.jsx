@@ -77,20 +77,21 @@ const MyAppointments = () => {
       ) : (
         <ul className="my-appointments-list">
           {activeAppointments.map((app) => {
-            const doctor = doctors[app.doctor];
+            
             let statusClass = "other";
             if (app.status === "scheduled") statusClass = "scheduled";
             else if (app.status === "cancelled") statusClass = "cancelled";
 
             return (
               <li key={app.id} className="my-appointments-item">
+                {console.log(app)}
                 <div className="my-appointments-info">
                   <p>
                     <strong>Врач:</strong>{" "}
-                    {doctor ? doctor.full_name : "Загрузка..."}
+                    {app.doctor ? app.doctor.full_name : "Загрузка..."}
                   </p>
                   <p>
-                    <strong>Специальность:</strong> {doctor?.specialty || "-"}
+                    <strong>Специальность:</strong> {app.doctor?.specialty || "-"}
                   </p>
                   <p>
                     <strong>Статус:</strong>{" "}

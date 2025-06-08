@@ -20,6 +20,14 @@ const Header = () => {
           {user ? (
             <>
               <span className="welcome">Здравствуйте, {user.username}</span>
+
+              {/* Проверка, если пользователь - доктор */}
+              {user.is_doctor && (
+                <Link to="/doctor/timeslots/create" className="nav">
+                  Мои тайм-слоты
+                </Link>
+              )}
+
               <Link to="/profile" className="nav">Профиль</Link>
               <button onClick={logout} className="logout-button">Выйти</button>
             </>

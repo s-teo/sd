@@ -16,7 +16,7 @@ const DoctorCard = ({ doctor, isSelected, onClick }) => {
         {doctor.average_rating ? (
           <StarRating rating={Math.round(doctor.average_rating)} />
         ) : (
-          <span style={{ color: '#aaa' }}>нет данных</span>
+          <span style={{ color: '#aaa' }}>нет отзывов</span>
         )}
       </div>
     </div>

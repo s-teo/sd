@@ -104,7 +104,7 @@ input:focus {
 button[type="submit"] {
   margin-top: 15px;
   padding: 14px 0;
-  background: linear-gradient(135deg, #4a6fa5, #88a0ff);
+  background: #1a73e8;
   border: none;
   border-radius: 12px;
   color: #fff;
@@ -116,7 +116,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background: linear-gradient(135deg, #88a0ff, #4a6fa5);
+  background: #054dab;
   box-shadow: 0 7px 25px #88a0ffbb;
   transform: scale(1.07);
 }

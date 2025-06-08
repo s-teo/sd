@@ -4,7 +4,7 @@ import { sendVerificationCode, verifyPhoneCode } from "../../api/auth";
 import "./PhoneVerification.css";
 
 export default function PhoneVerification() {
-  const isMock = true; // ← переключатель режима
+  const isMock = false; // ← переключатель режима
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -17,6 +17,18 @@ export default function PhoneVerification() {
   const [timer, setTimer] = useState(60);
 
   const hasSentRef = useRef(false); // защита от двойной отправки
+
+  const [flashMessage, setFlashMessage] = useState(
+      location.state?.flashMessage || null
+    );
+    const [showFlash, setShowFlash] = useState(!!location.state?.flashMessage);
+  
+    useEffect(() => {
+      if (flashMessage) {
+        const timer = setTimeout(() => setShowFlash(false), 3000);
+        return () => clearTimeout(timer);
+      }
+    }, [flashMessage]);
 
   useEffect(() => {
     if (phone && !hasSentRef.current) {
@@ -91,6 +103,14 @@ export default function PhoneVerification() {
 
   return (
     <div className="phone-verification-container">
+      {showFlash && (
+        <div className="flash-message">
+          {flashMessage}
+          <button className="close-btn" onClick={() => setShowFlash(false)}>
+            ×
+          </button>
+        </div>
+      )}
       <h2>Подтверждение номера телефона</h2>
       <p>Мы отправили код на номер: {phone}</p>
 
@@ -101,11 +121,11 @@ export default function PhoneVerification() {
         placeholder="Введите код"
       />
 
-      <button onClick={verifyCode} type="sumbit" disabled={loading || !code}>
+      <button className="verify-btn" onClick={verifyCode} type="sumbit" disabled={loading || !code}>
         Подтвердить
       </button>
 
-      <button onClick={sendCode} disabled={loading || timer > 0}>
+      <button className="resend-btn" onClick={sendCode} disabled={loading || timer > 0}>
         {timer > 0 ? `Повторно через ${timer} сек` : "Отправить код повторно"}
       </button>
 

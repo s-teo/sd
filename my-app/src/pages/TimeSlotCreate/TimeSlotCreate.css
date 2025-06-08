@@ -1,0 +1,77 @@
+.timeslot-create-container {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px 30px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fafafa;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.timeslot-create-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.timeslot-create-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeslot-create-container label {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #34495e;
+}
+
+.timeslot-create-container .react-datepicker-wrapper {
+  width: 100%;
+}
+
+.timeslot-create-container .react-datepicker__input-container input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.timeslot-create-container .react-datepicker__input-container input:focus {
+  border-color: #2980b9;
+  box-shadow: 0 0 5px #2980b9;
+}
+
+.timeslot-create-container button {
+  margin-top: 20px;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  background-color: #2980b9;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.timeslot-create-container button:hover {
+  background-color: #1f5d8a;
+}
+
+.timeslot-create-container .message {
+  margin-top: 15px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.timeslot-create-container .success {
+  color: #27ae60;
+}
+
+.timeslot-create-container .error {
+  color: #e74c3c;
+}

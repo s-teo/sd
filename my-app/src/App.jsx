@@ -3,14 +3,15 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import Layout from "./layouts/Layout";
 import HomePage from "@pages/HomePage/HomePage";
-import Login from "./pages/loginPage/LoginPage"
+import Login from "./pages/loginPage/LoginPage";
 import Register from "./pages/registerPage/RegisterPage";
 import PrivateRoute from "./routes/PrivateRoute";
+import DoctorRoute from "./routes/DoctorsRoute";
 import Profile from "./pages/profilePage/ProfilePage";
 import CreateAppointment from "./components/CreateAppointment/CreateAppointment";
 import Doctors from "./pages/DoctorsPage/DoctorsPage";
 import PhoneVerification from "@pages/PhoneVerification/PhoneVerification";
-
+import TimeSlotCreate from '@pages/TimeSlotCreate/TimeSlotCreate';
 
 
 function App() {
@@ -26,19 +27,22 @@ function App() {
             <Route path="/verify-phone" element={<PhoneVerification />} />
 
             {/* Защищенные маршруты */}
-            <Route
-              path="doctors"
-              element={
-                <Doctors/>
-              }
-             />
-  
+            <Route path="doctors" element={<Doctors />} />
+
             <Route
               path="/profile"
               element={
                 <PrivateRoute>
                   <Profile />
                 </PrivateRoute>
+              }
+            />
+            <Route
+              path="/doctor/timeslots/create"
+              element={
+                <DoctorRoute>
+                  <TimeSlotCreate />
+                </DoctorRoute>
               }
             />
 

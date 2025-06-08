@@ -17,15 +17,14 @@ const AppointmentHistory = ({ appointments, doctors }) => {
       <h3>История записей</h3>
       <ul className="my-appointments-list">
         {appointments.map((app) => {
-          const doctor = doctors[app.doctor];
           return (
             <li key={app.id} className="my-appointments-item">
               <div className="my-appointments-info">
                 <p>
-                  <strong>Врач:</strong> {doctor ? doctor.full_name : "Загрузка..."}
+                  <strong>Врач:</strong> {app.doctor ? app.doctor.full_name : "Загрузка..."}
                 </p>
                 <p>
-                  <strong>Специальность:</strong> {doctor?.specialty || "-"}
+                  <strong>Специальность:</strong> {app.doctor?.specialty || "-"}
                 </p>
                 <p>
                   <strong>Статус:</strong>{" "}

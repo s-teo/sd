@@ -104,3 +104,15 @@ button[type="submit"]:disabled {
   color: white;
   border-color: #0056b3;
 }
+
+.react-datepicker__day.has-slots {
+  background-color: #2980b9;
+  color: white;
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+.react-datepicker__day.has-slots:hover {
+  background-color: #1f5d8a;
+  color: white;
+}

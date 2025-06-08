@@ -23,7 +23,7 @@ const Header = () => {
 
               {/* Проверка, если пользователь - доктор */}
               {user.is_doctor && (
-                <Link to="/doctor/timeslots/create" className="nav">
+                <Link to="/doctor/appoinmetns" className="nav">
                   Мои тайм-слоты
                 </Link>
               )}

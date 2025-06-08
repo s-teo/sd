@@ -11,7 +11,7 @@ import Profile from "./pages/profilePage/ProfilePage";
 import CreateAppointment from "./components/CreateAppointment/CreateAppointment";
 import Doctors from "./pages/DoctorsPage/DoctorsPage";
 import PhoneVerification from "@pages/PhoneVerification/PhoneVerification";
-import TimeSlotCreate from '@pages/TimeSlotCreate/TimeSlotCreate';
+import DocAppointments from '@pages/docAppointmentsPage/DocAppointmentsPage';
 
 
 function App() {
@@ -38,10 +38,10 @@ function App() {
               }
             />
             <Route
-              path="/doctor/timeslots/create"
+              path="/doctor/appoinmetns"
               element={
                 <DoctorRoute>
-                  <TimeSlotCreate />
+                  <DocAppointments />
                 </DoctorRoute>
               }
             />

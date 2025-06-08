@@ -29,3 +29,15 @@ export const createTimeSlot = async (data) => {
   const response = await api.post('/doctors/timeslots/create/', data);
   return response.data;
 };
+
+
+export const getMyTimeSlots = async () => {
+  const response = await api.get('/doctors/timeslots/');
+  return response.data;
+};
+
+
+export const getMyAppointments = async () => {
+  const response = await api.get('/doctors/appointments/');
+  return response.data;
+};

@@ -1,0 +1,82 @@
+.appointments-page {
+  max-width: 700px;
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  margin: 30px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.appointments-page h1 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.alert-error {
+  background-color: #ffe3e3;
+  color: #cc0000;
+  border: 1px solid #cc0000;
+  padding: 12px 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Стили для CombinedScheduleList */
+
+.combined-schedule-list {
+  margin-bottom: 30px;
+}
+
+.combined-schedule-list h2 {
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  color: #222;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 6px;
+}
+
+.combined-schedule-list ul {
+  list-style-type: none;
+  padding-left: 0;
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  background-color: #fafafa;
+}
+
+.combined-schedule-list li {
+  padding: 10px 15px;
+  border-bottom: 1px solid #ddd;
+  font-size: 1rem;
+  color: #444;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.combined-schedule-list li:last-child {
+  border-bottom: none;
+}
+
+.combined-schedule-list li[type="appointment"] {
+  font-weight: 600;
+  color: #0a66c2;
+}
+
+.combined-schedule-list li[type="slot"] {
+  font-style: italic;
+  color: #666;
+}
+
+/* Кнопки и формы внутри TimeSlotCreate */
+/* Пример, если там есть кнопки */
+
+
+

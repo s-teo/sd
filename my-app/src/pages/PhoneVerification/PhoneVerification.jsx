@@ -4,7 +4,7 @@ import { sendVerificationCode, verifyPhoneCode } from "../../api/auth";
 import "./PhoneVerification.css";
 
 export default function PhoneVerification() {
-  const isMock = false; // ← переключатель режима
+  const isMock = true; // ← переключатель режима
 
   const location = useLocation();
   const navigate = useNavigate();

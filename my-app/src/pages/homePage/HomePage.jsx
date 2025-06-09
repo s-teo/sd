@@ -20,9 +20,9 @@ const HomePage = () => {
         setLoadingDoctors(true);
         const data = await getDoctors();
         setDoctors(data);
-        if (data.length > 0) {
-          setSelectedDoctor(data[0]);
-        }
+        // if (data.length > 0) {
+        //   setSelectedDoctor(data[0]);
+        // }
       } catch (err) {
         console.error("Ошибка при загрузке врачей", err);
       } finally {
@@ -143,24 +143,7 @@ const HomePage = () => {
         )}
       </section>
 
-      <section className="reviews">
-        <h2>Отзывы о {selectedDoctor ? selectedDoctor.full_name : "враче"}</h2>
-        {loadingReviews ? (
-          <p>Загрузка отзывов...</p>
-        ) : reviews.length > 0 ? (
-          reviews.map((review) => (
-            <blockquote key={review.id} className="review-item">
-              <p>{review.comment || "Без комментариев"}</p>
-              <footer>
-                — {review.patient_name}, рейтинг:{" "}
-                <StarRating rating={review.rating} maxRating={5} />
-              </footer>
-            </blockquote>
-          ))
-        ) : (
-          <p>Отзывы отсутствуют</p>
-        )}
-      </section>
+    
 
       <section className="cta-bottom">
         <h2>Готовы записаться на приём?</h2>

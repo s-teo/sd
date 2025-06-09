@@ -144,7 +144,7 @@ const CreateAppointment = () => {
             Врач:
             <input
               type="text"
-              value={`${selectedDoctorObj.full_name} (${selectedDoctorObj.specialty})`}
+              value={`${selectedDoctorObj.full_name}`}
               readOnly
             />
             <input type="hidden" value={selectedDoctor} name="doctor" />

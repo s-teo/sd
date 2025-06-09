@@ -1,0 +1,53 @@
+.combined-schedule {
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.schedule-title {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.schedule-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.schedule-card {
+    width: 300px;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease;
+}
+
+.schedule-card:hover {
+  transform: translateY(-2px);
+}
+
+.schedule-card.appointment {
+  border-left: 4px solid #007bff;
+}
+
+.schedule-card.timeslot {
+  border-left: 4px solid #28a745;
+}
+
+.schedule-time {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.schedule-content {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.free-slot {
+  color: #555;
+  font-style: italic;
+}

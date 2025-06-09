@@ -1,5 +1,5 @@
 .appointments-page {
-  max-width: 700px;
+  max-width: 1000px;
   display: grid;
   grid-template-columns: 2fr 2fr;
   margin: 30px auto;

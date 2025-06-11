@@ -1,0 +1,89 @@
+.chat-list {
+  padding: 16px;
+}
+
+.chat-list-title {
+  margin-bottom: 12px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.chat-list-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.chat-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Добавлено — разные фоны */
+
+.chat-list-item:hover {
+  opacity: 0.9;
+}
+
+.chat-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chat-avatar.placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #adb7b4;
+  color: #fff;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+}
+
+.chat-list-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-list-username {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.chat-list-last-message {
+  color: #666;
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.chat-list-loading,
+.chat-list-empty {
+  text-align: center;
+  color: #999;
+  padding: 12px 0;
+  font-size: 14px;
+}
+.chat-list-item.doctor-chat {
+  background-color: #e8f1fd; /* голубой */
+}
+
+.chat-list-item.patient-chat {
+  background-color: #e6f4ea; /* зеленый */
+}
+.chat-list-patient{
+    font-size: 10px;
+    font-weight: 600;
+    color: #666;
+}

@@ -1,0 +1,387 @@
+/* ===================================== */
+/* ==== Базовые стили и переменные (синхронизированы с HomePage.css) ==== */
+/* ===================================== */
+
+:root {
+  --primary-color: #004d99;
+  --secondary-color: #5c7b99;
+  --accent-color: #388e3c;
+  --background-light: #f8fbfd;
+  --text-dark: #2c3e50;
+  --text-medium: #7f8c8d;
+  --text-light: #ffffff;
+  --border-color: #e0e6ea;
+  --shadow-subtle: rgba(0, 0, 0, 0.04);
+  --shadow-medium: rgba(0, 0, 0, 0.08);
+  --font-family-heading: 'Merriweather', serif;
+  --font-family-body: 'Lato', sans-serif;
+  --spacing-unit: 1.4rem;
+}
+
+/* Общие стили для страницы */
+.about-us-page {
+  font-family: var(--font-family-body);
+  color: var(--text-light);
+  background-color: var(--background-light);
+  line-height: 1.7;
+}
+
+.about-us-page section {
+  padding: calc(3 * var(--spacing-unit)) 5%;
+  margin-bottom: var(--spacing-unit);
+  position: relative;
+  z-index: 1;
+}
+
+.about-us-page h1,
+.about-us-page h2,
+.about-us-page h3 {
+  font-family: var(--font-family-heading);
+  color: var(--primary-color);
+  margin-bottom: calc(1.5 * var(--spacing-unit));
+  text-align: center;
+  line-height: 1.2;
+}
+
+.about-us-page h1 {
+  font-size: 3.8rem;
+  font-weight: 700;
+  text-shadow: none;
+}
+
+.about-us-page h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-top: calc(2.5 * var(--spacing-unit));
+  position: relative;
+  display: inline-block;
+}
+
+.about-us-page h2::after {
+  content: '';
+  display: block;
+  width: 70px;
+  height: 2px;
+  background-color: var(--primary-color);
+  margin: 0.8rem auto 0;
+  border-radius: 1px;
+}
+
+.about-us-page h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.about-us-page p {
+  margin-bottom: 1.2rem;
+  font-size: 1.05rem;
+  color: var(--text-light);
+}
+
+/* Кнопки */
+.about-us-page .btn-primary {
+  display: inline-block;
+  padding: 0.9rem 2.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  font-size: 1.05rem;
+  text-transform: none;
+  letter-spacing: normal;
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  box-shadow: 0 4px 10px var(--shadow-subtle);
+}
+
+.about-us-page .btn-primary:hover {
+  background-color: #003366;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px var(--shadow-medium);
+}
+
+
+/* ===================================== */
+/* ==== Секция Hero (О нас) ==== */
+/* ===================================== */
+
+.about-hero {
+  background: linear-gradient(rgba(0, 77, 153, 0.9), rgba(0, 77, 153, 0.9)), url('https://source.unsplash.com/random/1920x800/?medical,clean,teamwork') center center/cover no-repeat fixed;
+  background-blend-mode: overlay;
+  color: var(--text-light);
+  text-align: center;
+  padding: 8rem 5%;
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-hero-content {
+  max-width: 900px;
+}
+
+.about-hero h1 {
+  font-size: 4.2rem;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+}
+
+.about-hero p {
+  font-size: 1.5rem;
+  opacity: 0.95;
+}
+
+/* ===================================== */
+/* ==== Наша Миссия ==== */
+/* ===================================== */
+
+.about-mission {
+  background-color: var(--text-light);
+  text-align: center;
+  padding: calc(3 * var(--spacing-unit)) 10%;
+}
+
+.mission-content {
+  max-width: 800px;
+  margin: calc(2 * var(--spacing-unit)) auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mission-content p {
+  font-size: 1.15rem;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+}
+
+.mission-icon {
+  font-size: 4.5rem; /* Чуть больше */
+  color: var(--primary-color);
+  opacity: 0.7;
+}
+
+/* ===================================== */
+/* ==== Актуальность Проекта ==== */
+/* ===================================== */
+
+.about-relevance {
+  background-color: var(--background-light);
+}
+
+.relevance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: calc(1.5 * var(--spacing-unit));
+  margin-top: calc(2 * var(--spacing-unit));
+  justify-items: center;
+}
+
+.relevance-item {
+  background-color: #ffffff;
+  padding: 1.8rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px var(--shadow-subtle);
+  text-align: center;
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.relevance-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px var(--shadow-medium);
+}
+
+.relevance-item h3 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.relevance-item p {
+  font-size: 1rem;
+  color: var(--text-medium);
+}
+
+/* ===================================== */
+/* ==== Наши Цели ==== */
+/* ===================================== */
+
+.about-goals {
+  background-color: var(--text-light);
+}
+
+.goals-list {
+  max-width: 800px;
+  margin: calc(2 * var(--spacing-unit)) auto 0;
+  list-style: none;
+  padding: 0;
+}
+
+.goals-list li {
+  background-color: var(--background-light);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: flex-start;
+  font-size: 1.05rem;
+  color: var(--text-dark);
+  box-shadow: 0 3px 10px var(--shadow-subtle);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.goals-list li:hover {
+  transform: translateX(8px); /* Легкое смещение */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.goal-icon {
+  font-size: 1.4rem;
+  color: var(--accent-color);
+  margin-right: 1rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* ===================================== */
+/* ==== Наша Команда ==== */
+/* ===================================== */
+
+.about-team {
+  background-color: var(--background-light);
+}
+
+.team-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(2 * var(--spacing-unit));
+  max-width: 900px;
+  margin: calc(2 * var(--spacing-unit)) auto 0;
+  text-align: center;
+}
+
+.team-content p {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+}
+
+.team-image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px var(--shadow-medium);
+  border: 2px solid var(--border-color); /* Более выраженная рамка */
+  transition: transform 0.3s ease;
+}
+
+.team-image:hover {
+  transform: scale(1.01); /* Едва заметное увеличение */
+}
+
+/* ===================================== */
+/* ==== CTA в конце страницы ==== */
+/* ===================================== */
+
+.about-cta {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  text-align: center;
+  padding: 5rem 5%;
+}
+
+.about-cta h2 {
+  color: var(--text-light);
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.about-cta h2::after {
+    display: none;
+}
+
+.about-cta p {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    color: var(--text-light);
+    opacity: 0.95;
+}
+
+.about-cta .btn-primary {
+  background-color: var(--accent-color);
+  box-shadow: 0 4px 10px var(--shadow-subtle);
+}
+
+.about-cta .btn-primary:hover {
+  background-color: #2b7d30;
+  box-shadow: 0 6px 15px var(--shadow-medium);
+}
+
+/* ===================================== */
+/* ==== Адаптивность (Media Queries) ==== */
+/* ===================================== */
+
+@media (max-width: 1200px) {
+    .about-hero h1 { font-size: 3.8rem; }
+    .about-hero p { font-size: 1.4rem; }
+    .about-us-page h2 { font-size: 2.5rem; }
+    .about-us-page h3 { font-size: 1.6rem; }
+}
+
+@media (max-width: 992px) {
+    .about-hero {
+        padding: 7rem 5%;
+        min-height: 50vh;
+    }
+    .about-hero h1 { font-size: 3.2rem; }
+    .about-hero p { font-size: 1.2rem; }
+    .about-us-page h2 { font-size: 2.2rem; }
+    .about-us-page h3 { font-size: 1.4rem; }
+
+    .relevance-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+  .about-us-page section {
+    padding: calc(2 * var(--spacing-unit)) 5%;
+  }
+
+  .about-hero {
+    padding: 5rem 5%;
+    min-height: 40vh;
+  }
+
+  .about-hero h1 { font-size: 2.8rem; }
+  .about-hero p { font-size: 1.1rem; }
+  .about-us-page h2 { font-size: 1.8rem; }
+  .about-us-page h3 { font-size: 1.2rem; }
+
+  .relevance-grid,
+  .goals-list,
+  .team-content {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .relevance-item,
+  .goals-list li {
+      width: 100%;
+      max-width: 420px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero h1 { font-size: 2.2rem; }
+  .about-hero p { font-size: 1rem; }
+  .about-us-page h2 { font-size: 1.5rem; }
+  .about-us-page h3 { font-size: 1rem; }
+}

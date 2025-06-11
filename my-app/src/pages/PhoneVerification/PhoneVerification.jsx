@@ -16,7 +16,7 @@ export default function PhoneVerification() {
   const [hasSent, setHasSent] = useState(false);
   const [timer, setTimer] = useState(60);
 
-  const hasSentRef = useRef(false); // защита от двойной отправки
+  const hasSentRef = useRef(true); // защита от двойной отправки
 
   const [flashMessage, setFlashMessage] = useState(
       location.state?.flashMessage || null
@@ -53,7 +53,7 @@ export default function PhoneVerification() {
     try {
       if (isMock) {
         await new Promise((resolve) => setTimeout(resolve, 500));
-        setMessage("Мок: код отправлен (используй 123456)");
+        setMessage("Мок: код отправлен (используй 1234)");
       } else {
         const res = await sendVerificationCode(phone);
         setMessage(res.data.message || "Код отправлен на телефон");

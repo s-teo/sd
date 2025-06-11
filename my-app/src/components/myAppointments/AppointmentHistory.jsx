@@ -21,11 +21,13 @@ const AppointmentHistory = ({ appointments, doctors }) => {
             <li key={app.id} className="my-appointments-item">
               <div className="my-appointments-info">
                 <p>
-                  <strong>Врач:</strong> {app.doctor ? app.doctor.full_name : "Загрузка..."}
+                  <strong>Врач:</strong>{" "}
+                  {app.doctor ? app.doctor.full_name : "Загрузка..."}
                 </p>
-                <p>
-                  <strong>Специальность:</strong> {app.doctor?.specialty || "-"}
-                </p>
+                <div>
+                  <strong>Специальность:</strong>{" "}
+                  {app.doctor.specialty.map((spec) => spec.name).join(", ")}
+                </div>
                 <p>
                   <strong>Статус:</strong>{" "}
                   <span className={`my-appointments-status completed`}>
@@ -34,16 +36,17 @@ const AppointmentHistory = ({ appointments, doctors }) => {
                 </p>
                 <p>
                   <strong>Дата и время:</strong>{" "}
-                  {app.time_slot_data ? (
-                    new Date(app.time_slot_data.start_time).toLocaleString("ru-RU", {
-                      day: "numeric",
-                      month: "long",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })
-                  ) : (
-                    "Нет данных"
-                  )}
+                  {app.time_slot_data
+                    ? new Date(app.time_slot_data.start_time).toLocaleString(
+                        "ru-RU",
+                        {
+                          day: "numeric",
+                          month: "long",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        }
+                      )
+                    : "Нет данных"}
                 </p>
               </div>
             </li>

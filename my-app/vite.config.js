@@ -11,7 +11,7 @@ export default defineConfig({
       '@layouts': path.resolve(__dirname, './src/layouts'),
       '@pages': path.resolve(__dirname, './src/pages'),
       '@api': path.resolve(__dirname, './src/api'),
-      // Добавь свои алиасы по необходимости
+      '@context': path.resolve(__dirname, './src/context'),
     },
   },
 });

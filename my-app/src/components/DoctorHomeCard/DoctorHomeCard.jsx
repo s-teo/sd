@@ -3,7 +3,7 @@ import "./DoctorHomeCard.css";
 import StarRating from "../ui/StarRating";
 import { useNavigate } from "react-router-dom";
 
-const DoctorCard = ({ doctor, isSelected, onClick }) => {
+const DoctorHomeCard = ({ doctor, isSelected, onClick }) => {
   return (
     <div
       className={`doctor-card ${isSelected ? "selected" : ""}`}
@@ -24,4 +24,4 @@ const DoctorCard = ({ doctor, isSelected, onClick }) => {
   );
 };
 
-export default DoctorCard;
+export default DoctorHomeCard;

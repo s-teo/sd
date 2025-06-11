@@ -11,6 +11,13 @@ export const getAvailableTimeSlots = async (doctorId) => {
   return response.data;
 };
 
+// Получить конкретного врача по ID
+export const getDoctorById = async (doctorId) => {
+  const response = await api.get(`/doctors/${doctorId}/`);
+  return response.data;
+};
+
+
 // Получить отзывы о враче
 export const getDoctorReviews = async (doctorId) => {
   const response = await api.get(`/doctors/${doctorId}/reviews/`);

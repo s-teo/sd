@@ -3,13 +3,18 @@
   border-bottom: 1px solid #ccc;
   padding: 10px 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky; /* Добавлено для "прилипающего" хедера */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Убедимся, что хедер всегда сверху */
 }
 
 .header-container {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Сохранено */
   justify-content: space-between;
   align-items: center;
 }
@@ -19,25 +24,34 @@
   font-weight: bold;
   color: #0077cc;
   text-decoration: none;
-  margin-bottom: 10px;
+  margin-bottom: 10px; /* Сохранено */
+  transition: color 0.2s ease; /* Добавлено плавное изменение цвета */
+}
+
+.logo:hover {
+  color: #005fa3; /* Чуть темнее при наведении */
 }
 
 .nav {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Сохранено */
   gap: 10px;
   align-items: center;
+  /* Для мобильного меню: */
+  transition: opacity 0.3s ease-out, visibility 0.3s ease-out, transform 0.3s ease-out;
 }
 
-.nav a {
+/* Изменено с "nav a" на "nav-link" для лучшей специфичности */
+.nav-link {
   text-decoration: none;
   color: #333;
   padding: 8px 12px;
   border-radius: 4px;
   transition: background-color 0.2s ease;
+  white-space: nowrap; /* Чтобы ссылки не переносились на десктопе */
 }
 
-.nav a:hover {
+.nav-link:hover {
   background-color: #e0eaff;
 }
 
@@ -48,8 +62,8 @@
   padding: 8px 12px;
   border-radius: 4px;
   cursor: pointer;
-    transition: all 1s;
-
+  transition: all 0.3s ease; /* Изменено с 1s для более быстрой анимации */
+  white-space: nowrap;
 }
 
 .nav-button:hover {
@@ -63,7 +77,8 @@
   padding: 8px 12px;
   border-radius: 4px;
   cursor: pointer;
-  transition: all 1s;
+  transition: all 0.3s ease; /* Изменено с 1s для более быстрой анимации */
+  white-space: nowrap;
 }
 
 .logout-button:hover {
@@ -74,32 +89,147 @@
   margin: 0 10px;
   color: #555;
   font-weight: 500;
+  white-space: nowrap; /* Чтобы имя пользователя не переносилось */
 }
 
-/* Адаптивность для мобильных */
+/* ===================================== */
+/* ==== Стили для Бургер-Меню (Добавлено) ==== */
+/* ===================================== */
+
+.menu-toggle {
+  display: none; /* Скрываем по умолчанию на больших экранах */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px; /* Немного уменьшил паддинг */
+  z-index: 1001; /* Убедимся, что кнопка поверх всего */
+  position: relative;
+  width: 30px; /* Фиксированная ширина для иконки */
+  height: 24px; /* Фиксированная высота для иконки */
+}
+
+.burger-icon {
+  display: block;
+  width: 100%; /* Занимает всю ширину кнопки */
+  height: 3px; /* Толщина линии */
+  background-color: #0077cc; /* Цвет линий (как логотип) */
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.burger-icon::before,
+.burger-icon::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #0077cc; /* Цвет линий */
+  position: absolute;
+  left: 0;
+  transition: transform 0.3s ease, top 0.3s ease;
+}
+
+.burger-icon::before {
+  top: -9px; /* Отступ верхней линии */
+}
+
+.burger-icon::after {
+  top: 9px; /* Отступ нижней линии */
+}
+
+/* Анимация бургера в крестик при активном состоянии */
+.menu-toggle.active .burger-icon {
+  background-color: transparent; /* Центральная линия исчезает */
+}
+
+.menu-toggle.active .burger-icon::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.menu-toggle.active .burger-icon::after {
+  transform: rotate(-45deg);
+  top: 0;
+}
+
+
+/* ===================================== */
+/* ==== Адаптивность для мобильных (Переработано) ==== */
+/* ===================================== */
+
 @media (max-width: 768px) {
   .header-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .nav {
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-  }
-
-  .nav a,
-  .logout-button,
-  .nav-button {
-    width: 100%;
-    text-align: left;
-    padding: 10px;
-    box-sizing: border-box;
+    flex-direction: row; /* На маленьких экранах лого и бургер остаются в ряд */
+    justify-content: space-between; /* Лого слева, бургер справа */
+    align-items: center;
+    padding: 0 15px; /* Немного уменьшил горизонтальный паддинг */
   }
 
   .logo {
-    margin-bottom: 10px;
+    margin-bottom: 0; /* Убираем нижний отступ у лого на мобильных */
   }
+
+  .menu-toggle {
+    display: block; /* Показываем бургер-кнопку */
+  }
+
+  .nav {
+    position: absolute;
+    top: 100%; /* Меню появляется прямо под хедером */
+    left: 0;
+    width: 100%;
+    background-color: #f0f4f8; /* Фоновый цвет меню, как у хедера */
+    flex-direction: column; /* Элементы меню в столбец */
+    align-items: flex-start; /* Выравниваем по левому краю */
+    padding: 15px 20px; /* Паддинги для мобильного меню */
+    gap: 5px; /* Уменьшаем отступы между пунктами */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Тень для выпадающего меню */
+
+    /* Скрываем меню по умолчанию */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px); /* Немного сдвинуто вверх */
+    pointer-events: none; /* Отключаем события, когда меню скрыто */
+  }
+
+  .nav.open {
+    opacity: 1; /* Показываем меню */
+    visibility: visible;
+    transform: translateY(0); /* Возвращаем на место */
+    pointer-events: auto; /* Включаем события */
+  }
+
+  .nav-link,
+  .nav-button,
+  .logout-button,
+  .welcome {
+    width: 100%; /* Элементы занимают всю ширину меню */
+    text-align: left;
+    padding: 10px 15px; /* Увеличенные паддинги для удобства касания */
+    box-sizing: border-box; /* Учитываем паддинги в ширине */
+    margin-bottom: 5px; /* Отступ между элементами */
+  }
+
+  .nav-button {
+      margin-top: 10px; /* Добавляем отступ для кнопок Войти/Регистрация */
+  }
+
+  .welcome {
+      padding: 10px 15px; /* Применяем те же паддинги */
+  }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.3rem;
+    }
+    .nav-link,
+    .nav-button,
+    .logout-button,
+    .welcome {
+        font-size: 0.9rem; /* Чуть меньше шрифт на самых маленьких экранах */
+    }
 }

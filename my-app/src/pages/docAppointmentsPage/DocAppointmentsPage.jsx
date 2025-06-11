@@ -79,6 +79,7 @@ const DocAppointmentsPage = () => {
     <div className="appointments-page">
       {error && <div className="alert-error">{error}</div>}
       <CombinedScheduleList items={combinedList} />
+      {console.log(combinedList)}
 
       <TimeSlotCreate onSuccess={fetchData} />
 

@@ -1,14 +1,19 @@
 import React from "react";
-import "./CombinedScheduleList.css"; // подключаем стили
+import "./CombinedScheduleList.css";
 
 const CombinedScheduleList = ({ items }) => {
-  if (!items.length) return <p>Расписание пусто.</p>;
+  const now = new Date();
+
+  // Оставляем только те, что начинаются в будущем
+  const upcomingItems = items.filter(item => new Date(item.start_time) > now);
+
+  if (!upcomingItems.length) return <p>Ближайших записей нет.</p>;
 
   return (
     <div className="combined-schedule">
       <h2 className="schedule-title">Расписание</h2>
       <div className="schedule-list">
-        {items.map((item) => (
+        {upcomingItems.map((item) => (
           <div className={`schedule-card ${item.type}`} key={`${item.type}-${item.id}`}>
             <div className="schedule-time">
               {new Date(item.start_time).toLocaleString()}

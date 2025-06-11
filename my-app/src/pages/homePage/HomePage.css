@@ -1,122 +1,505 @@
-.hero {
-  background: #f0f8ff;
-  padding: 40px 20px;
+/* ===================================== */
+/* ==== Базовые стили и переменные ==== */
+/* ===================================== */
+
+:root {
+  --primary-color: #004d99;
+  --secondary-color: #5c7b99; /* Небесно-голубой, для второстепенных акцентов */
+  --accent-color: #28a745; /* Сочный зеленый для успеха/акций */
+  --background-light: #f0f8ff; /* Очень светлый, почти белый голубой фон */
+  --text-dark: #34495e; /* Темный серо-синий текст */
+  --text-light: #ffffff; /* Белый текст */
+  --border-color: #cce7ff; /* Светло-голубая граница */
+  --shadow-subtle: rgba(0, 0, 0, 0.08); /* Легкая тень */
+  --shadow-medium: rgba(0, 0, 0, 0.15); /* Средняя тень */
+  --font-family-heading: 'Poppins', sans-serif; /* Для заголовков, если подключен */
+  --font-family-body: 'Open Sans', sans-serif; /* Для основного текста, если подключен */
+  --spacing-unit: 1.5rem; /* Базовый отступ */
+}
+
+/* Рекомендуется подключить Google Fonts в public/index.html или App.js */
+/*
+  Например, в public/index.html добавьте в <head>:
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+*/
+
+
+/* Общие стили для секций */
+section {
+  padding: calc(3 * var(--spacing-unit)) 5%;
+  margin-bottom: var(--spacing-unit);
+  position: relative; /* Для возможных фоновых элементов */
+  z-index: 1;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-family-heading);
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-unit);
   text-align: center;
-  margin-bottom: 40px;
+  line-height: 1.2;
 }
 
-.hero-content h1 {
+h1 {
+  font-size: 3.5rem; /* Чуть крупнее */
+  font-weight: 700;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Легкая тень для заголовков */
+}
+
+h2 {
   font-size: 2.8rem;
-  margin-bottom: 10px;
-  color: #1a237e;
+  font-weight: 700;
+  margin-top: calc(2.5 * var(--spacing-unit));
+  position: relative;
+  display: inline-block; /* Для underline эффекта */
 }
 
-.hero-content p {
-  font-size: 1.3rem;
-  margin-bottom: 20px;
-  color: #3949ab;
+h2::after { /* Анимированная линия под заголовком */
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+/* Кнопки */
+.btn-primary, .btn-secondary {
+  display: inline-block;
+  padding: 1rem 2.2rem; /* Чуть больше */
+  border-radius: 30px; /* Скругленные кнопки */
+  text-decoration: none;
+  font-weight: 600; /* Более жирный шрифт */
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Плавная анимация */
+  cursor: pointer;
+  border: none;
+  font-size: 1.1rem;
+  text-transform: uppercase; /* Верхний регистр */
+  letter-spacing: 1px;
 }
 
 .btn-primary {
-  background-color: #2563eb;
-  color: white;
-  padding: 12px 24px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  background: linear-gradient(45deg, var(--primary-color) 0%, #00aaff 100%); /* Градиент */
+  color: var(--text-light);
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3); /* Тень для объема */
 }
 
 .btn-primary:hover {
-  background-color: #1d4ed8;
+  background: linear-gradient(45deg, #00aaff 0%, var(--primary-color) 100%);
+  transform: translateY(-5px); /* Легкий подъем */
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
 }
 
-.how-it-works,
-.advantages,
-.doctors,
-.reviews,
-.cta-bottom {
-  max-width: 900px;
-  margin: 0 auto 50px auto;
-  padding: 0 20px;
+.btn-secondary {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 3px 10px rgba(0, 123, 255, 0.1);
 }
 
-.how-it-works h2,
-.advantages h2,
-.doctors h2,
-.reviews h2,
-.cta-bottom h2 {
+.btn-secondary:hover {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
+}
+
+/* ===================================== */
+/* ==== Секция Hero (Главный экран) ==== */
+/* ===================================== */
+
+.hero {
+  /* Используем более абстрактный фон или иллюстрацию для "прикольности" */
+  background: linear-gradient(rgba(0, 77, 153, 0.9), rgba(0, 77, 153, 0.9)), url('https://source.unsplash.com/random/1920x800/?medical,clean,teamwork') center center/cover no-repeat fixed;
+  color: var(--text-light);
   text-align: center;
-  color: #1a237e;
-  margin-bottom: 30px;
+  padding: 10rem 5%; /* Больше воздуха */
+  min-height: 80vh; /* Занимает большую часть экрана */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Заметная тень для секции */
 }
 
-.steps-list,
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  animation: fadeInDown 1s ease-out forwards; /* Анимация появления */
+}
+
+.hero h1 {
+  font-size: 4.5rem; /* Ещё крупнее */
+  color: var(--text-light);
+  margin-bottom: 2rem;
+  line-height: 1.1;
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3); /* Более выраженная тень */
+}
+
+.hero p {
+  font-size: 1.6rem;
+  margin-bottom: 3rem;
+  opacity: 0.95;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.hero .btn-primary {
+  font-size: 1.4rem;
+  padding: 1.2rem 3rem;
+}
+
+/* ===================================== */
+/* ==== Как работает MedBooking (How it works) ==== */
+/* ===================================== */
+
+.how-it-works {
+  background-color: var(--text-light);
+  padding-top: calc(3 * var(--spacing-unit));
+  padding-bottom: calc(3 * var(--spacing-unit));
+}
+
+.steps-list {
+  display: flex;
+  justify-content: center; /* Центрируем, если элементов меньше */
+  flex-wrap: wrap;
+  gap: calc(2 * var(--spacing-unit)); /* Увеличиваем отступы */
+  margin-top: calc(3 * var(--spacing-unit));
+}
+
+.step-item {
+  flex: 1;
+  min-width: 280px;
+  max-width: 380px;
+  text-align: center;
+  padding: 2rem; /* Больше padding */
+  border-radius: 15px; /* Более скругленные углы */
+  background: linear-gradient(145deg, #ffffff, #f0f8ff); /* Легкий градиент */
+  box-shadow: 0 8px 25px var(--shadow-subtle); /* Мягкая тень */
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border: 1px solid var(--border-color); /* Слегка видимая рамка */
+}
+
+.step-item:hover {
+  transform: translateY(-8px) scale(1.02); /* Чуть больше подъем и увеличение */
+  box-shadow: 0 12px 30px var(--shadow-medium);
+}
+
+.step-item h3 {
+  color: var(--accent-color); /* Зеленый акцент */
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.step-item p {
+  color: var(--text-dark);
+  font-size: 1.05rem;
+}
+
+/* ===================================== */
+/* ==== Почему выбирают нас (Advantages) ==== */
+/* ===================================== */
+
+.advantages {
+  background-color: var(--background-light);
+  padding-top: calc(3 * var(--spacing-unit));
+  padding-bottom: calc(3 * var(--spacing-unit));
+}
+
 .advantages-list {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: calc(2 * var(--spacing-unit));
+  margin-top: calc(3 * var(--spacing-unit));
 }
 
-.step-item,
 .advantage-item {
-  flex: 1 1 280px;
-  background-color: #e8eaf6;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+  flex: 1;
+  min-width: 280px;
+  max-width: 380px;
   text-align: center;
+  padding: 2rem;
+  border-radius: 15px;
+  background: #ffffff; /* Просто белый фон */
+  border: 1px solid var(--border-color);
+  box-shadow: 0 6px 20px var(--shadow-subtle);
+  transition: all 0.4s ease;
 }
 
-.step-item h3,
-.advantage-item h3 {
-  margin-bottom: 10px;
-  color: #3949ab;
+.advantage-item:hover {
+  transform: scale(1.03); /* Увеличение при наведении */
+  box-shadow: 0 10px 25px var(--shadow-medium);
+  background-color: var(--secondary-color); /* Смена фона при наведении */
+  color: var(--text-light); /* Изменение цвета текста */
+}
+
+.advantage-item:hover h3,
+.advantage-item:hover p,
+.advantage-item:hover .advantage-icon {
+    color: var(--text-light); /* Изменение цвета текста и иконок */
 }
 
 .advantage-icon {
-  font-size: 2.5rem;
-  margin-bottom: 12px;
-  display: inline-block;
+  font-size: 4rem; /* Крупнее иконки */
+  margin-bottom: 1.2rem;
+  display: block;
+  color: var(--primary-color); /* Основной цвет иконок */
+  transition: color 0.4s ease;
+}
+
+.advantage-item h3 {
+  color: var(--primary-color);
+  font-size: 1.6rem;
+  margin-bottom: 0.8rem;
+  transition: color 0.4s ease;
+}
+
+.advantage-item p {
+  color: var(--secondary-color);
+  font-size: 1.05rem;
+  transition: color 0.4s ease;
+}
+
+/* ===================================== */
+/* ==== Наши специалисты (Doctors) ==== */
+/* ===================================== */
+
+.doctors {
+  background-color: var(--text-light);
+  padding-top: calc(3 * var(--spacing-unit));
+  padding-bottom: calc(3 * var(--spacing-unit));
 }
 
 .doctors-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: calc(2 * var(--spacing-unit)); /* Увеличиваем отступы */
+  margin-top: calc(3 * var(--spacing-unit));
+  justify-items: center;
 }
 
-.review-item {
-  background-color: #f5f5f5;
-  padding: 15px 20px;
-  margin-bottom: 15px;
-  border-left: 4px solid #2563eb;
-  border-radius: 6px;
+.latest-news {
+  background-color: var(--text-light); /* Используем белый фон для контраста */
+  padding-top: calc(3 * var(--spacing-unit));
+  padding-bottom: calc(3 * var(--spacing-unit));
+  text-align: center;
 }
 
-.review-item p {
-  font-style: italic;
-  margin-bottom: 8px;
+.news-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: calc(2 * var(--spacing-unit));
+  margin-top: calc(3 * var(--spacing-unit));
+  justify-items: center;
 }
 
-.review-item footer {
-  font-weight: bold;
-  color: #1a237e;
+.news-item {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px var(--shadow-subtle);
+  overflow: hidden;
+  text-align: left;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border: 1px solid var(--border-color);
+  max-width: 400px;
+}
+
+.news-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px var(--shadow-medium);
+}
+
+.news-item img {
+  width: 100%;
+  height: 220px; /* Чуть выше картинки */
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid var(--border-color); /* Разделитель */
+}
+
+.news-item h3 {
+  font-size: 1.4rem;
+  margin: 1.2rem 1.5rem 0.8rem; /* Увеличиваем отступы */
+  color: var(--primary-color);
+  text-align: left;
+}
+
+.news-item h3 a {
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+}
+
+.news-item h3 a:hover {
+  color: var(--secondary-color); /* Изменение цвета при наведении */
+}
+
+.news-item p {
+  font-size: 1rem;
+  color: var(--text-dark);
+  padding: 0 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.news-date {
+  display: block;
   font-size: 0.9rem;
+  color: var(--secondary-color);
+  padding: 0 1.5rem 1.5rem;
+  font-weight: 600;
 }
+
+/* ===================================== */
+/* ==== Нижний Call to Action (CTA) ==== */
+/* ===================================== */
 
 .cta-bottom {
-  padding: 30px 20px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); /* Яркий градиент */
+  color: var(--text-light);
   text-align: center;
-  color: white;
-  max-width: 600px;
-  margin: 40px auto 0;
-  border-radius: 10px;
+  padding: 5rem 5%; /* Больше padding */
+  box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.15); /* Тень сверху */
 }
 
 .cta-bottom h2 {
-  margin-bottom: 20px;
+  color: var(--text-light);
+  font-size: 2.8rem;
+  margin-bottom: 2rem;
+}
+
+.cta-bottom h2::after { /* Убираем линию под заголовком CTA */
+    display: none;
+}
+
+.cta-bottom .btn-primary {
+  margin-left: 100px;
+  margin-bottom: 100px;
+  background: linear-gradient(45deg, var(--accent-color) 0%, #32cd32 100%); /* Зеленый градиент */
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+}
+
+.cta-bottom .btn-primary:hover {
+  background: linear-gradient(45deg, #32cd32 0%, var(--accent-color) 100%);
+  box-shadow: 0 8px 20px rgba(40, 167, 69, 0.5);
+}
+
+/* ===================================== */
+/* ==== Анимации ==== */
+/* ===================================== */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================================== */
+/* ==== Адаптивность (Media Queries) ==== */
+/* ===================================== */
+
+@media (max-width: 1200px) {
+    h1 { font-size: 4rem; }
+    h2 { font-size: 2.5rem; }
+    h3 { font-size: 1.6rem; }
+}
+
+@media (max-width: 992px) {
+  h1 { font-size: 3.5rem; }
+  h2 { font-size: 2.2rem; }
+  h3 { font-size: 1.4rem; }
+
+  .hero {
+    height: 70vh;
+    padding: 8rem 5%;
+  }
+
+  .hero h1 {
+    font-size: 3.8rem;
+  }
+  .hero p {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: calc(2 * var(--spacing-unit)) 5%;
+  }
+
+  h1 { font-size: 2.8rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.2rem; }
+
+  .hero {
+    height: 60vh;
+    padding: 5rem 5%;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+  }
+  .hero p {
+    font-size: 1.1rem;
+  }
+  .hero .btn-primary {
+    font-size: 1.1rem;
+    padding: 0.9rem 2.2rem;
+  }
+
+  .steps-list,
+  .advantages-list,
+  .doctors-list,
+  .reviews-list,
+  .news-list {
+    grid-template-columns: 1fr; /* Один столбец на мобильных */
+    gap: var(--spacing-unit);
+  }
+
+  .step-item,
+  .advantage-item,
+  .review-item,
+  .news-item {
+    width: 100%; /* Занимают всю ширину */
+    max-width: 450px; /* Ограничиваем максимальную ширину */
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .advantage-icon {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.6rem; }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  .hero p {
+    font-size: 1rem;
+  }
+  .hero .btn-primary {
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
+  }
 }

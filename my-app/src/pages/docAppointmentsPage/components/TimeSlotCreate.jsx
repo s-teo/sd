@@ -19,9 +19,9 @@ const TimeSlotCreate = () => {
 
     try {
       await createTimeSlot({ start_time: startDate.toISOString() });
-      setSuccess('Тайм-слот успешно создан');
+      setSuccess('Сессия создана успешно');
     } catch (err) {
-      setError('Ошибка при создании тайм-слота');
+      setError('Ошибка при создании сессии');
     }
   };
 
@@ -39,7 +39,7 @@ const TimeSlotCreate = () => {
 
   return (
     <div className="timeslot-create-container">
-      <h2>Создание тайм-слота</h2>
+      <h2>Создание новой сессии</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="date-picker">Дата и время:</label>
         <DatePicker

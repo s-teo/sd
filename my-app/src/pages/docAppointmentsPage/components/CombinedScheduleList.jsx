@@ -11,7 +11,7 @@ const CombinedScheduleList = ({ items }) => {
 
   return (
     <div className="combined-schedule">
-      <h2 className="schedule-title">Расписание</h2>
+      <h2 className="schedule-title">Сессии</h2>
       <div className="schedule-list">
         {upcomingItems.map((item) => (
           <div className={`schedule-card ${item.type}`} key={`${item.type}-${item.id}`}>
@@ -26,7 +26,7 @@ const CombinedScheduleList = ({ items }) => {
                   <div><strong>Телефон:</strong> {item.phone}</div>
                 </>
               ) : (
-                <div className="free-slot">Свободный слот</div>
+                <div className="free-slot">Свободная сессия</div>
               )}
             </div>
           </div>

@@ -11,7 +11,7 @@ import Profile from "./pages/profilePage/ProfilePage";
 import CreateAppointment from "./components/CreateAppointment/CreateAppointment";
 import Doctors from "./pages/DoctorsPage/DoctorsPage";
 import PhoneVerification from "@pages/PhoneVerification/PhoneVerification";
-import DocAppointments from '@pages/docAppointmentsPage/DocAppointmentsPage';
+import DocAppointments from "@pages/docAppointmentsPage/DocAppointmentsPage";
 import MessagesPage from "./pages/Messages/Messages"; // добавляем MessagesPage
 import About from "./pages/AboutUsPage/AboutUsPage"; // добавляем MessagesPage
 
@@ -26,8 +26,7 @@ function AppRoutes() {
         <Route path="/register" element={<Register />} />
         <Route path="/verify-phone" element={<PhoneVerification />} />
         <Route path="/doctors" element={<Doctors />} />
-        <Route path="/about" element={<About   />} />
-
+        <Route path="/about" element={<About />} />
         <Route
           path="/profile"
           element={
@@ -52,8 +51,6 @@ function AppRoutes() {
             </PrivateRoute>
           }
         />
-
-        {/* ✅ Добавляем маршрут для сообщений */}
         <Route
           path="/messages"
           element={
@@ -66,7 +63,6 @@ function AppRoutes() {
     </Layout>
   );
 }
-
 export default function App() {
   return (
     <AuthProvider>
